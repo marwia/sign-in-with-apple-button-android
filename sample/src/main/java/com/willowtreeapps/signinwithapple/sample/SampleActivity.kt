@@ -30,6 +30,7 @@ class SampleActivity : AppCompatActivity() {
             when (result) {
                 is SignInWithAppleResult.Success -> {
                     Toast.makeText(this, result.authorizationCode, LENGTH_SHORT).show()
+                    Log.d("SAMPLE_APP", "User logged, code: ${result.authorizationCode}")
                 }
                 is SignInWithAppleResult.Failure -> {
                     Log.d("SAMPLE_APP", "Received error from Apple Sign In ${result.error.message}")

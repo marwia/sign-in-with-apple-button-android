@@ -40,9 +40,12 @@ internal class UrlInterceptorWebViewClient(
         }
     }
 
+    // if Android version < Lollipop
     override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? {
-        if (url?.contains(urlToIntercept) == true && view != null) {
-            Handler(Looper.getMainLooper()).post { injectJavascript(view) }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            if (url?.contains(urlToIntercept) == true && view != null) {
+                Handler(Looper.getMainLooper()).post { injectJavascript(view) }
+            }
         }
         return super.shouldInterceptRequest(view, url)
     }
